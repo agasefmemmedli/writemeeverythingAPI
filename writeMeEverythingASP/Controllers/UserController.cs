@@ -161,7 +161,7 @@ namespace writeMeEverythingASP.Controllers
 
         }
 
-        /////////////////////////////////////////
+
         [HttpGet, Route("blockFriend")]
         public IHttpActionResult BlockFriend([FromUri] int friendId )
         {
@@ -176,15 +176,78 @@ namespace writeMeEverythingASP.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (_context.Friends.Any(u => (((u.SenderId == user.Id && u.ReceiverId == friendId) && u.isSenderBlocked == false) || ((u.SenderId == friendId && u.ReceiverId == user.Id) && u.isReceiverBlocked == false)) && u.isFriend == true))
+
+            Friend friend = _context.Friends.FirstOrDefault
+                (f => 
+                    (
+                        ((f.SenderId == user.Id && f.ReceiverId == friendId) && f.isSenderBlocked == false) ||
+                        ((f.SenderId == friendId && f.ReceiverId == user.Id) && f.isReceiverBlocked == false)
+                    ) && f.isFriend==true
+                );
+
+            if (friend == null) 
             {
-                return Ok("user is blocked");
+                return BadRequest(Messages.UsrNotFound);
             }
 
+            if (friend.SenderId == user.Id)
+            {
+                friend.isSenderBlocked = true;
+            }
+            else
+            {
+                friend.isReceiverBlocked = true;
+            }
+            _context.SaveChanges();
+
+            string message = Messages.UsrBlocked;
 
 
+            return Ok(new { message });
+        }
 
-            return Ok();
+
+        [HttpGet, Route("unblockFriend")]
+        public IHttpActionResult UnblockFriend([FromUri] int friendId)
+        {
+            string token = Request.Headers.GetValues("token").First().ToString();
+
+
+            User user = _context.Users.FirstOrDefault(u => u.Token == token);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("Error", Messages.UsrNotFound);
+                return BadRequest(ModelState);
+            }
+
+            Friend friend = _context.Friends.FirstOrDefault
+               (f =>
+                   (
+                       ((f.SenderId == user.Id && f.ReceiverId == friendId) && f.isSenderBlocked == true) ||
+                       ((f.SenderId == friendId && f.ReceiverId == user.Id) && f.isReceiverBlocked == true)
+                   ) && f.isFriend == true
+               );
+
+            if (friend == null)
+            {
+                return BadRequest(Messages.UsrNotFound);
+            }
+
+            if (friend.SenderId == user.Id)
+            {
+                friend.isSenderBlocked = false;
+            }
+            else
+            {
+                friend.isReceiverBlocked = false;
+            }
+            _context.SaveChanges();
+
+            string message = Messages.UsrUnblocked;
+
+
+            return Ok(new { message });
         }
     }
 }

@@ -106,11 +106,29 @@ namespace writeMeEverythingASP.Res {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на User Blocked..
+        /// </summary>
+        public static string UsrBlocked {
+            get {
+                return ResourceManager.GetString("UsrBlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на User Not Found..
         /// </summary>
         public static string UsrNotFound {
             get {
                 return ResourceManager.GetString("UsrNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на User Unblocked..
+        /// </summary>
+        public static string UsrUnblocked {
+            get {
+                return ResourceManager.GetString("UsrUnblocked", resourceCulture);
             }
         }
         

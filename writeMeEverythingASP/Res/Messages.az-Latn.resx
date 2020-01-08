@@ -132,8 +132,14 @@
   <data name="ResetPass" xml:space="preserve">
     <value>Parolunuzu yeniləmək üçün elektron poçtunuzu yoxlayın:</value>
   </data>
+  <data name="UsrBlocked" xml:space="preserve">
+    <value>Istifadəçi bloklandi.</value>
+  </data>
   <data name="UsrNotFound" xml:space="preserve">
     <value>İstifadəçi tapılmadı.</value>
+  </data>
+  <data name="UsrUnblocked" xml:space="preserve">
+    <value>Istifadəçi bloklan cixarildi.</value>
   </data>
   <data name="VerifyAcc" xml:space="preserve">
     <value>Qeydiyyatıziı başa çatdırmaq üçün elektron poçtunuzu təsdiqləyin:</value>

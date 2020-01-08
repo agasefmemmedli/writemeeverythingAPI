@@ -132,8 +132,14 @@
   <data name="ResetPass" xml:space="preserve">
     <value>For reset your password, please check your email:</value>
   </data>
+  <data name="UsrBlocked" xml:space="preserve">
+    <value>User Blocked.</value>
+  </data>
   <data name="UsrNotFound" xml:space="preserve">
     <value>User Not Found.</value>
+  </data>
+  <data name="UsrUnblocked" xml:space="preserve">
+    <value>User Unblocked.</value>
   </data>
   <data name="VerifyAcc" xml:space="preserve">
     <value>To complete your sign up, please verify your email: </value>

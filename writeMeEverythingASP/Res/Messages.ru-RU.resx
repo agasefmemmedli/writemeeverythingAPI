@@ -132,8 +132,14 @@
   <data name="ResetPass" xml:space="preserve">
     <value>Для сброса пароля проверьте свою электронную почту:</value>
   </data>
+  <data name="UsrBlocked" xml:space="preserve">
+    <value>Пользователь заблокирован.</value>
+  </data>
   <data name="UsrNotFound" xml:space="preserve">
     <value>Пользователь не найден.</value>
+  </data>
+  <data name="UsrUnblocked" xml:space="preserve">
+    <value>Пользователь разблокирован.</value>
   </data>
   <data name="VerifyAcc" xml:space="preserve">
     <value>Чтобы завершить регистрацию, подтвердите адрес электронной почты:</value>
