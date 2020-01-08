@@ -61,6 +61,15 @@ namespace writeMeEverythingASP.Res {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на You are already friends..
+        /// </summary>
+        public static string AlrdFriends {
+            get {
+                return ResourceManager.GetString("AlrdFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на This email is already registered..
         /// </summary>
         public static string EmailExists {

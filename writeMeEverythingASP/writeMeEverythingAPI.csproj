@@ -111,6 +111,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiModel\AddFriendModel.cs" />
     <Compile Include="ApiModel\ChatModel.cs" />
     <Compile Include="ApiModel\EmailModel.cs" />
     <Compile Include="ApiModel\FriendModel.cs" />

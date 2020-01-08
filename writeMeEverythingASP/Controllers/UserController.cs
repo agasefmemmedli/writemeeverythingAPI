@@ -249,5 +249,64 @@ namespace writeMeEverythingASP.Controllers
 
             return Ok(new { message });
         }
+
+        [HttpPost, Route("addFriend")]
+        public IHttpActionResult AddFriend(AddFriendModel addFriend)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string token = Request.Headers.GetValues("token").First().ToString();
+
+
+            User user = _context.Users.FirstOrDefault(u => u.Token == token);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("Error", Messages.UsrNotFound);
+                return BadRequest(ModelState);
+            }
+
+            User friend = _context.Users.FirstOrDefault(f => f.Email == addFriend.Email);
+
+            if (friend == null) 
+            {
+
+                return BadRequest(Messages.UsrNotFound);
+            }
+            string message;
+
+            Friend checkFriend = _context.Friends.FirstOrDefault(f => (f.SenderId == user.Id && f.ReceiverId == friend.Id) || (f.SenderId == friend.Id  && f.ReceiverId == user.Id));
+
+            if (checkFriend != null) 
+            {
+                message = Messages.AlrdFriends;
+                return Ok(new { message });
+            }
+
+            Friend addFriendInDb = new Friend()
+            {
+                SenderId = user.Id,
+                ReceiverId = friend.Id,
+                isFriend = false,
+                isSenderBlocked=false,
+                isReceiverBlocked=false,
+                CreateAt=DateTime.Now
+            };
+
+            _context.Friends.Add(addFriendInDb);
+
+            _context.SaveChanges();
+
+
+            message = Messages.UsrUnblocked;
+
+
+            return Ok(new { message });
+        }
+
+
     }
 }
