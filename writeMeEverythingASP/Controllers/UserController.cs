@@ -368,6 +368,47 @@ namespace writeMeEverythingASP.Controllers
         }
 
 
+        [HttpPost, Route("replyFriendRequest")]
+        public IHttpActionResult ReplyFriendRequest(ReplyFriendRequest reply)
+        {
+            string token = Request.Headers.GetValues("token").First().ToString();
+
+            User user = _context.Users.FirstOrDefault(u => u.Token == token);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("Error", Messages.UsrNotFound);
+                return BadRequest(ModelState);
+            }
+
+            Friend friend = _context.Friends.FirstOrDefault(f=>f.SenderId==user.Id && f.ReceiverId==reply.FriendId);
+
+            if (friend==null) 
+            {
+                ModelState.AddModelError("Error", Messages.UsrNotFound);
+                return BadRequest(ModelState);
+            }
+
+            if (friend.isFriend == true) 
+            {
+                return Ok(new { Messages.AlrdFriends});
+            }
+            string Message;
+            if (reply.ReplyRequest==true) 
+            {
+                friend.isFriend = true;
+                Message = Messages.AccFriends;
+            }
+            else 
+            {
+                _context.Friends.Remove(friend);
+                Message = Messages.DelFriends;
+
+            }
+            _context.SaveChanges();
+
+            return Ok(new { Message });
+        }
 
     }
 }

@@ -61,6 +61,15 @@ namespace writeMeEverythingASP.Res {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Friendship is accepted..
+        /// </summary>
+        public static string AccFriends {
+            get {
+                return ResourceManager.GetString("AccFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на You are already friends..
         /// </summary>
         public static string AlrdFriends {
@@ -75,6 +84,15 @@ namespace writeMeEverythingASP.Res {
         public static string AlrdReqFriend {
             get {
                 return ResourceManager.GetString("AlrdReqFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Friendship is deleted..
+        /// </summary>
+        public static string DelFriends {
+            get {
+                return ResourceManager.GetString("DelFriends", resourceCulture);
             }
         }
         

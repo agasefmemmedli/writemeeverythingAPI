@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccFriends" xml:space="preserve">
+    <value>Friendship is accepted.</value>
+  </data>
   <data name="AlrdFriends" xml:space="preserve">
     <value>You are already friends.</value>
   </data>
   <data name="AlrdReqFriend" xml:space="preserve">
     <value>You are already send friend request.</value>
+  </data>
+  <data name="DelFriends" xml:space="preserve">
+    <value>Friendship is deleted.</value>
   </data>
   <data name="EmailExists" xml:space="preserve">
     <value>This email is already registered.</value>

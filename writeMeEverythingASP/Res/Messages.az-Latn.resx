@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccFriends" xml:space="preserve">
+    <value>Dostluq qəbul olundu.</value>
+  </data>
   <data name="AlrdFriends" xml:space="preserve">
     <value>Siz artıq dostsunuz.</value>
   </data>
   <data name="AlrdReqFriend" xml:space="preserve">
     <value>Siz artıq dostluq təklifi göndərmisiz.</value>
+  </data>
+  <data name="DelFriends" xml:space="preserve">
+    <value>Dostluq imtina olundu.</value>
   </data>
   <data name="EmailExists" xml:space="preserve">
     <value>Bu e-poçt artıq qeydiyyatdan keçib.</value>

@@ -120,6 +120,7 @@
     <Compile Include="ApiModel\MessageListModel.cs" />
     <Compile Include="ApiModel\MessageModel.cs" />
     <Compile Include="ApiModel\Register.cs" />
+    <Compile Include="ApiModel\ReplyFriendRequest.cs" />
     <Compile Include="ApiModel\ResetModel.cs" />
     <Compile Include="ApiModel\UserModel.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
