@@ -120,6 +120,9 @@
   <data name="AlrdFriends" xml:space="preserve">
     <value>Вы уже друзья.</value>
   </data>
+  <data name="AlrdReqFriend" xml:space="preserve">
+    <value>Вы уже отправили запрос добавление в друзья.</value>
+  </data>
   <data name="EmailExists" xml:space="preserve">
     <value>Этот Email уже зарегистрирован.</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="UsrNotFound" xml:space="preserve">
     <value>Пользователь не найден.</value>
+  </data>
+  <data name="UsrReq" xml:space="preserve">
+    <value>Запрос на добавление в друзья был отправлен.</value>
   </data>
   <data name="UsrUnblocked" xml:space="preserve">
     <value>Пользователь разблокирован.</value>

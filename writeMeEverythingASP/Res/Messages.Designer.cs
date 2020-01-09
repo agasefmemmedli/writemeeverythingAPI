@@ -70,6 +70,15 @@ namespace writeMeEverythingASP.Res {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на You are already send friend request..
+        /// </summary>
+        public static string AlrdReqFriend {
+            get {
+                return ResourceManager.GetString("AlrdReqFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на This email is already registered..
         /// </summary>
         public static string EmailExists {
@@ -129,6 +138,15 @@ namespace writeMeEverythingASP.Res {
         public static string UsrNotFound {
             get {
                 return ResourceManager.GetString("UsrNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Friend request has been sent..
+        /// </summary>
+        public static string UsrReq {
+            get {
+                return ResourceManager.GetString("UsrReq", resourceCulture);
             }
         }
         

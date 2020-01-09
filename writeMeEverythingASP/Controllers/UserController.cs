@@ -126,7 +126,7 @@ namespace writeMeEverythingASP.Controllers
 
 
 
-        [HttpGet, Route("messagesList")]
+        [HttpGet, Route("MessagesList")]
         public IHttpActionResult MessageList([FromUri] int friendId,[FromUri] int take, [FromUri] int skip  )
         {
             string token = Request.Headers.GetValues("token").First().ToString();
@@ -145,7 +145,7 @@ namespace writeMeEverythingASP.Controllers
                 return NotFound();
             }
 
-            List<MessageModel> messages = _context.Messages.Select(m =>
+            List<MessageModel> Message = _context.Messages.Select(m =>
             new MessageModel
             {
                 SenderId = user.Id,
@@ -156,7 +156,7 @@ namespace writeMeEverythingASP.Controllers
                 CreateAt = m.CreateAt
             }).OrderBy(f => f.CreateAt).Skip(skip).Take(take).ToList();
 
-            return Ok(new { messages });
+            return Ok(new { Message });
 
 
         }
@@ -200,10 +200,10 @@ namespace writeMeEverythingASP.Controllers
             }
             _context.SaveChanges();
 
-            string message = Messages.UsrBlocked;
+            string Message = Messages.UsrBlocked;
 
 
-            return Ok(new { message });
+            return Ok(new { Message });
         }
 
 
@@ -244,13 +244,13 @@ namespace writeMeEverythingASP.Controllers
             }
             _context.SaveChanges();
 
-            string message = Messages.UsrUnblocked;
+            string Message = Messages.UsrUnblocked;
 
 
-            return Ok(new { message });
+            return Ok(new { Message });
         }
 
-        [HttpPost, Route("addFriend")]
+        [HttpPost, Route("friendRequest")]
         public IHttpActionResult AddFriend(AddFriendModel addFriend)
         {
             if (!ModelState.IsValid)
@@ -271,19 +271,26 @@ namespace writeMeEverythingASP.Controllers
 
             User friend = _context.Users.FirstOrDefault(f => f.Email == addFriend.Email);
 
-            if (friend == null) 
+            if (friend == null || friend.Email==user.Email) 
             {
-
                 return BadRequest(Messages.UsrNotFound);
             }
-            string message;
+            string Message;
 
             Friend checkFriend = _context.Friends.FirstOrDefault(f => (f.SenderId == user.Id && f.ReceiverId == friend.Id) || (f.SenderId == friend.Id  && f.ReceiverId == user.Id));
 
             if (checkFriend != null) 
             {
-                message = Messages.AlrdFriends;
-                return Ok(new { message });
+                if (checkFriend.isFriend == false)
+                {
+                    Message = Messages.AlrdReqFriend;
+                }
+                else 
+                {
+                    Message = Messages.AlrdFriends;
+                }
+               
+                return Ok(new { Message });
             }
 
             Friend addFriendInDb = new Friend()
@@ -301,11 +308,65 @@ namespace writeMeEverythingASP.Controllers
             _context.SaveChanges();
 
 
-            message = Messages.UsrUnblocked;
+            Message = Messages.UsrReq;
 
 
-            return Ok(new { message });
+            return Ok(new { Message });
         }
+
+
+        [HttpGet, Route("friendRequestList")]
+        public IHttpActionResult FriendRequestList()
+        {
+            string token = Request.Headers.GetValues("token").First().ToString();
+
+
+            User user = _context.Users.FirstOrDefault(u => u.Token == token);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("Error", Messages.UsrNotFound);
+                return BadRequest(ModelState);
+            }
+
+          
+            List<FriendModel> friendsRequest = _context.Friends.Include("Sender").Include("Receiver").Where(f =>
+            (f.SenderId == user.Id || f.ReceiverId == user.Id) && f.isFriend == false && f.isReceiverBlocked == false && f.isSenderBlocked == false).Select(f =>
+            new FriendModel
+            {
+                FriendId = (f.ReceiverId == user.Id ? f.SenderId : f.ReceiverId),
+                CreateAt = f.CreateAt,
+                Friend = (f.SenderId == user.Id ? new UserModel
+                {
+                    Name = f.Receiver.Name,
+                    Surname = f.Receiver.Surname,
+                    Email = f.Receiver.Email,
+                    About = f.Receiver.About,
+                    Avatar = f.Receiver.Avatar,
+                    City = f.Receiver.City,
+                    CreateAt = f.Receiver.CreateAt,
+                    isOnline = f.Receiver.isOnline,
+                    Lastseen = f.Receiver.Lastseen,
+                    Phone = f.Receiver.Phone
+                } : new UserModel
+                {
+                    Name = f.Sender.Name,
+                    Surname = f.Sender.Surname,
+                    Email = f.Sender.Email,
+                    About = f.Sender.About,
+                    Avatar = f.Sender.Avatar,
+                    City = f.Sender.City,
+                    CreateAt = f.Sender.CreateAt,
+                    isOnline = f.Sender.isOnline,
+                    Lastseen = f.Sender.Lastseen,
+                    Phone = f.Sender.Phone
+                })
+            }).ToList();
+
+
+            return Ok(new { friendsRequest });
+        }
+
 
 
     }

@@ -120,6 +120,9 @@
   <data name="AlrdFriends" xml:space="preserve">
     <value>Siz artıq dostsunuz.</value>
   </data>
+  <data name="AlrdReqFriend" xml:space="preserve">
+    <value>Siz artıq dostluq təklifi göndərmisiz.</value>
+  </data>
   <data name="EmailExists" xml:space="preserve">
     <value>Bu e-poçt artıq qeydiyyatdan keçib.</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="UsrNotFound" xml:space="preserve">
     <value>İstifadəçi tapılmadı.</value>
+  </data>
+  <data name="UsrReq" xml:space="preserve">
+    <value>Dostluq təklifi gonderildi.</value>
   </data>
   <data name="UsrUnblocked" xml:space="preserve">
     <value>Istifadəçi bloklan cixarildi.</value>
